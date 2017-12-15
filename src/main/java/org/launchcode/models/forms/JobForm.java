@@ -1,9 +1,6 @@
 package org.launchcode.models.forms;
 
-import org.launchcode.models.CoreCompetency;
-import org.launchcode.models.Employer;
-import org.launchcode.models.Location;
-import org.launchcode.models.PositionType;
+import org.launchcode.models.*;
 import org.launchcode.models.data.JobData;
 
 import javax.validation.constraints.NotNull;
@@ -16,11 +13,27 @@ import java.util.ArrayList;
 public class JobForm {
 
     @NotNull
-    @Size(min=1, message = "Name may not be empty")
+    @Size(min = 1, message = "Name may not be empty")
     private String name;
 
     @NotNull
     private int employerId;
+
+    //private JobFieldType type = JobFieldType.ALL;
+    @NotNull
+    private int locationId;
+
+
+    @NotNull
+    private int positionTypeId;
+
+    @NotNull
+    private int coreCompetencyId;
+
+
+
+
+
 
     /*
         TODO #3 - Included other fields needed to create a job,
@@ -30,8 +43,9 @@ public class JobForm {
 
     private ArrayList<Employer> employers;
     private ArrayList<Location> locations;
-    private ArrayList<CoreCompetency> coreCompetencies;
     private ArrayList<PositionType> positionTypes;
+    private ArrayList<CoreCompetency> coreCompetencies;
+
 
     public JobForm() {
 
@@ -42,6 +56,10 @@ public class JobForm {
         */
 
         employers = jobData.getEmployers().findAll();
+        locations = jobData.getLocations().findAll();
+        positionTypes = jobData.getPositionTypes().findAll();
+        coreCompetencies = jobData.getCoreCompetencies().findAll();
+
 
     }
 
@@ -61,6 +79,18 @@ public class JobForm {
         this.employerId = employerId;
     }
 
+    public int getLocationId() { return locationId; }
+
+    public void setLocationId(int locationId) { this.locationId = locationId; }
+
+    public int getPositionTypeId() { return positionTypeId; }
+
+    public void setPositionTypeId(int positionTypeId) { this.positionTypeId = positionTypeId; }
+
+    public int getCoreCompetencyId() { return coreCompetencyId; }
+
+    public void setCoreCompetencyId(int coreCompetencyId) { this.coreCompetencyId = coreCompetencyId; }
+
     public ArrayList<Employer> getEmployers() {
         return employers;
     }
@@ -77,6 +107,14 @@ public class JobForm {
         this.locations = locations;
     }
 
+    public ArrayList<PositionType> getPositionTypes() {
+        return positionTypes;
+    }
+
+    public void setPositionTypes(ArrayList<PositionType> positionTypes) {
+        this.positionTypes = positionTypes;
+    }
+
     public ArrayList<CoreCompetency> getCoreCompetencies() {
         return coreCompetencies;
     }
@@ -85,11 +123,4 @@ public class JobForm {
         this.coreCompetencies = coreCompetencies;
     }
 
-    public ArrayList<PositionType> getPositionTypes() {
-        return positionTypes;
-    }
-
-    public void setPositionTypes(ArrayList<PositionType> positionTypes) {
-        this.positionTypes = positionTypes;
-    }
 }
